@@ -18,7 +18,7 @@ namespace AdminPanel.WebApi
         public static IServiceCollection ConfugureServices(this IServiceCollection services)
         {
             services.AddControllers()
-                .AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+                .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
             services.AddEndpointsApiExplorer();
 
@@ -61,7 +61,6 @@ namespace AdminPanel.WebApi
             }
 
             app.UseHttpsRedirection();
-
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
 

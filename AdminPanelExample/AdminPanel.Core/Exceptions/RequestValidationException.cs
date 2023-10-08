@@ -1,5 +1,4 @@
-﻿
-namespace AdminPanel.Core.Exceptions
+﻿namespace AdminPanel.Core.Exceptions
 {
     /// <summary>
     /// Request is not valid exception

@@ -1,5 +1,4 @@
-﻿
-namespace AdminPanel.Core
+﻿namespace AdminPanel.Core
 {
     /// <summary>
     /// Static class for all constants

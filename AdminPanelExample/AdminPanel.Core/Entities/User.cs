@@ -1,5 +1,4 @@
-﻿
-namespace AdminPanel.Core.Entities
+﻿namespace AdminPanel.Core.Entities
 {
     /// <summary>
     /// User

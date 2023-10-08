@@ -1,10 +1,12 @@
 ﻿namespace AdminPanel.Core.Contracts
 {
     /// <summary>
-    /// Command for update user
+    /// Command for adding new role to user
     /// </summary>
-    public class UpdateUserCommand : CreateUserCommand
+    public class AddNewRoleToUserCommand
     {
         public Guid Id { get; set; }
+
+        public RoleType Role { get; set; }
     }
 }

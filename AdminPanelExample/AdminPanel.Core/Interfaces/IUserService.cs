@@ -38,6 +38,13 @@ namespace AdminPanel.Core.Interfaces
         Task UpdateUserAsync(UpdateUserCommand command, CancellationToken cancellationToken);
 
         /// <summary>
+        /// Add new role to user
+        /// </summary>
+        /// <param name="command">AddNewRoleToUserCommand</param>
+        /// <param name="cancellationToken">Cancellation token</param>
+        Task AddNewRoleToUser(AddNewRoleToUserCommand command, CancellationToken cancellationToken);
+
+        /// <summary>
         /// Delete user by id
         /// </summary>
         /// <param name="id">id</param>
