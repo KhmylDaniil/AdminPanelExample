@@ -11,9 +11,10 @@ namespace AdminPanel.Core.Interfaces
         /// <summary>
         /// Get user list
         /// </summary>
+        /// <param name="query">Filter query</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>UserDTO list</returns>
-        Task<List<UserDTO>> GetUsersAsync(CancellationToken cancellationToken);
+        Task<List<UserDTO>> GetUsersAsync(GetUsersQuery query, CancellationToken cancellationToken);
 
         /// <summary>
         /// Get user by id

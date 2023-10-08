@@ -32,8 +32,8 @@ namespace AdminPanel.WebApi.Controllers
         /// </response>
         /// <returns>List of users</returns>
         [HttpGet]
-        public async Task<List<UserDTO>> GetUsersAsync(CancellationToken cancellationToken)
-            => await _userService.GetUsersAsync(cancellationToken);
+        public async Task<List<UserDTO>> GetUsersAsync([FromQuery] GetUsersQuery query, CancellationToken cancellationToken)
+            => await _userService.GetUsersAsync(query, cancellationToken);
 
         /// <summary>
         /// Get user by id

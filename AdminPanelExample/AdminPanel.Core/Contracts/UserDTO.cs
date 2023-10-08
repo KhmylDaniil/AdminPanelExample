@@ -11,6 +11,8 @@ namespace AdminPanel.Core.Contracts.DTO
 
         public string Name { get; init; }
 
+        public int Age { get; init; }
+
         public string Email { get; init; }
 
         public string Roles { get; init; }
@@ -23,6 +25,7 @@ namespace AdminPanel.Core.Contracts.DTO
         {
             Id = user.Id; 
             Name = user.Name; 
+            Age = user.Age;
             Email = user.Email;
             Roles = string.Join(", ", user.Roles.Select(x => x.Name));
         }

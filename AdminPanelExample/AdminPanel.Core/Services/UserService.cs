@@ -4,8 +4,7 @@ using AdminPanel.Core.Entities;
 using AdminPanel.Core.Exceptions;
 using AdminPanel.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Threading;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using System.Security.Cryptography.X509Certificates;
 
 namespace AdminPanel.Core.Services
 {
@@ -21,11 +20,18 @@ namespace AdminPanel.Core.Services
         /// <summary>
         /// Get user list
         /// </summary>
+        /// <param name="query">Filter query</param>
         /// <param name="cancellationToken">cancellation token</param>
         /// <returns>UserDTO list</returns>
-        public async Task<List<UserDTO>> GetUsersAsync(CancellationToken cancellationToken)
+        public async Task<List<UserDTO>> GetUsersAsync(GetUsersQuery query, CancellationToken cancellationToken)
         {
-            return await _appDbContext.Users.Include(u => u.Roles).Select(u => new UserDTO(u)).ToListAsync(cancellationToken);
+            var filter = _appDbContext.Users.Include(u => u.Roles)
+                .Where(u => string.IsNullOrEmpty(query.SearchByName) || u.Name.Contains(query.SearchByName))
+                .Where(u => string.IsNullOrEmpty(query.SearchByEmail) || u.Email.Contains(query.SearchByEmail))
+                .Where(u => u.Age >= query.MinAge && u.Age <= query.MaxAge)
+                .Where(u => query.SearchByRole == null || u.Roles.Any(r => r.Name.Contains(Enum.GetName(query.SearchByRole.Value))));
+            
+            return await filter.Skip((query.PageNumber - 1) * query.PageSize).Take(query.PageSize).Select(u => new UserDTO(u)).ToListAsync(cancellationToken);
         }
 
         /// <summary>
