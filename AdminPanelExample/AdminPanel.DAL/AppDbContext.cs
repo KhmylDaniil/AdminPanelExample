@@ -1,9 +1,13 @@
 ﻿using AdminPanel.Core.Entities;
+using AdminPanel.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace AdminPanel.DAL
 {
-    public class AppDbContext: DbContext
+    /// <summary>
+    /// Db context
+    /// </summary>
+    public class AppDbContext: DbContext, IAppDbContext
     {
         public DbSet<User> Users { get; set; }
 

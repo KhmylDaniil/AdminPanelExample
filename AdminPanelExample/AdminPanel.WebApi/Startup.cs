@@ -1,4 +1,6 @@
-﻿using AdminPanel.DAL;
+﻿using AdminPanel.Core.Interfaces;
+using AdminPanel.Core.Services;
+using AdminPanel.DAL;
 using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 
@@ -31,6 +33,9 @@ namespace AdminPanel.WebApi
 
                 c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{typeof(Program).Assembly.GetName().Name}.xml"), true);
             });
+
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IAppDbContext, AppDbContext>();
 
             return services;
         }

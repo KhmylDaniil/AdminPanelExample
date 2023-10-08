@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  adminpanel.webapi:
+    image: ${DOCKER_REGISTRY-}adminpanelwebapi
+    container_name: ${CONTAINER_NAME}
+    environment:
+        - ASPNETCORE_ENVIRONMENT=Development    
+        - ASPNETCORE_URLS=http://+:${CONTAINER_PORT}
+        - ConnectionStrings__Default=Host=${DATABASE_NAME};Port=${DATABASE_PORT};Database=${DATABASE_DB_NAME};Username=${DATABASE_USER};Password=${DATABASE_PASSWORD}
+    ports:
+        - "9970:${CONTAINER_PORT}"
+    volumes:
+        - ${HOST_LOGS}:${CONTAINER_LOGS}
+    build:
+      context: .
+      dockerfile: AdminPanel.WebApi/Dockerfile
+  adminpanel.db:
+    image: postgres:15.3
+    container_name: ${DATABASE_CONTAINER_NAME}
+    restart: unless-stopped
+    environment:
+        DATABASE_HOST: 127.0.0.1
+        POSTGRES_USER: ${DATABASE_USER}
+        POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+        POSTGRES_DB: ${DATABASE_DB_NAME}
+    ports:
+        - "5444:${DATABASE_PORT}"
+    volumes:
+        - ${HOST_DATABASE_DATA}:${CONTAINER_DATABASE_DATA}

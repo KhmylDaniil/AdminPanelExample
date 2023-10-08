@@ -22,4 +22,15 @@ namespace AdminPanel.Core
 
         public static readonly Guid UserRoleId = new("5B006ACC-C409-4437-B1DC-F81692D11FC8");
     }
+
+    /// <summary>
+    /// Role types for add and update user commands
+    /// </summary>
+    public enum RoleType
+    {
+        SuperAdmin,
+        Admin,
+        Support,
+        User
+    }
 }
