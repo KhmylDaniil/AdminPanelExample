@@ -30,10 +30,10 @@ namespace AdminPanel.Core.Services
         public async Task<Token> LoginUserAsync(LoginUserCommand command, CancellationToken cancellationToken)
         {
             var user = await _appDbContext.Users.Include(u => u.Roles).FirstOrDefaultAsync(x => x.Email == command.Email, cancellationToken)
-                ?? throw new RequestValidationException("Password or login are incorrect.");
+                ?? throw new RequestValidationException(Constants.IncorrectLoginOrPassword);
 
             if (!_passwordService.ComparePasswordHashes(dbPasswordHash: user.Password, password: command.Password))
-                throw new RequestValidationException("Password or login are incorrect.");
+                throw new RequestValidationException(Constants.IncorrectLoginOrPassword);
 
             var token = _jwtService.GenerateToken(user);
 

@@ -24,6 +24,8 @@
         public static readonly Guid SupportRoleId = new("E061708D-919C-48B0-AD2A-25A6155D0521");
 
         public static readonly Guid UserRoleId = new("5B006ACC-C409-4437-B1DC-F81692D11FC8");
+
+        public const string IncorrectLoginOrPassword = "Password or login are incorrect.";
     }
 
     /// <summary>

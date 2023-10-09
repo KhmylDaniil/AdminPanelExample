@@ -22,16 +22,17 @@ namespace AdminPanel.WebApi.Controllers
         public UserController(IUserService userService) => _userService = userService;
 
         /// <summary>
-        /// Get all users
+        /// Get list of users
         /// </summary>
+        /// <param name="query">Query</param>
         /// <param name="cancellationToken">Cancellation token</param>
         /// <response code="200">
         /// Returns if succeeded
         /// </response>
         /// <response code="500">
-        /// Returns if failed
+        /// Returns in case of other errors
         /// </response>
-        /// <returns>List of users</returns>
+        /// <returns>Filtered and sorted list of users</returns>
         [HttpGet]
         public async Task<List<UserDTO>> GetUsersAsync([FromQuery] GetUsersQuery query, CancellationToken cancellationToken)
             => await _userService.GetUsersAsync(query, cancellationToken);
@@ -44,11 +45,11 @@ namespace AdminPanel.WebApi.Controllers
         /// <response code="200">
         /// Returns if succeeded
         /// </response>
-        /// <response code="204">
+        /// <response code="404">
         /// Returns if not found
         /// </response>
         /// <response code="500">
-        /// Returns if failed
+        /// Returns in case of other errors
         /// </response>
         /// <returns>User</returns>
         [HttpGet("{id}")]
@@ -63,10 +64,15 @@ namespace AdminPanel.WebApi.Controllers
         /// <response code="200">
         /// Returns if succeeded
         /// </response>
-        /// <response code="500">
-        /// Returns if failed
+        /// <response code="404">
+        /// Returns in case of not founding necessary entities
         /// </response>
-        /// <returns></returns>
+        /// <response code="422">
+        /// Returns in case of validation error
+        /// </response>
+        /// <response code="500">
+        /// Returns in case of other errors
+        /// </response>
         [HttpPost]
         public async Task Post([FromQuery] CreateUserCommand command, CancellationToken cancellationToken)
             => await _userService.CreateUserAsync(command, cancellationToken);
@@ -80,10 +86,15 @@ namespace AdminPanel.WebApi.Controllers
         /// <response code="200">
         /// Returns if succeeded
         /// </response>
-        /// <response code="500">
-        /// Returns if failed
+        /// <response code="404">
+        /// Returns in case of not founding necessary entities
         /// </response>
-        /// <returns></returns>
+        /// <response code="422">
+        /// Returns in case of validation error
+        /// </response>
+        /// <response code="500">
+        /// Returns in case of other errors
+        /// </response>
         [HttpPut("{id}")]
         public async Task UpdateUserAsync(Guid id, [FromQuery] CreateUserCommand command, CancellationToken cancellationToken)
         {
@@ -100,10 +111,18 @@ namespace AdminPanel.WebApi.Controllers
         /// <response code="200">
         /// Returns if succeeded
         /// </response>
-        /// <response code="500">
-        /// Returns if failed
+        /// <response code="401">
+        /// Returns when not authorized
         /// </response>
-        /// <returns></returns>
+        /// <response code="404">
+        /// Returns in case of not founding necessary entities
+        /// </response>
+        /// <response code="422">
+        /// Returns in case of validation error
+        /// </response>
+        /// <response code="500">
+        /// Returns in case of other errors
+        /// </response>
         [HttpPatch]
         [Authorize]
         [CustomAuthorization(Constants.RoleClaim, Constants.AdminRoleName)]
@@ -118,10 +137,12 @@ namespace AdminPanel.WebApi.Controllers
         /// <response code="200">
         /// Returns if succeeded
         /// </response>
-        /// <response code="500">
-        /// Returns if failed
+        /// <response code="404">
+        /// Returns in case of not founding necessary entities
         /// </response>
-        /// <returns></returns>
+        /// <response code="500">
+        /// Returns in case of other errors
+        /// </response>
         [HttpDelete("{id}")]
         public async Task DeleteAsync(Guid id, CancellationToken cancellationToken)
             => await _userService.DeleteUserAsync(id, cancellationToken);

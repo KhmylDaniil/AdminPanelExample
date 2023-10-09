@@ -16,7 +16,7 @@ namespace AdminPanel.WebApi
         /// <param name="services"></param>
         public static IServiceCollection ConfugureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddControllers()
+            services.AddControllers(opt => opt.Filters.Add(typeof(ExceptionFilter)))
                 .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
             services.AddEndpointsApiExplorer();
@@ -41,7 +41,7 @@ namespace AdminPanel.WebApi
         public static void Configure(this IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseStaticFiles();
-            app.UseRouting();
+            
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
@@ -50,6 +50,9 @@ namespace AdminPanel.WebApi
             if (env.IsDevelopment())
                 app.UseCustomSwagger();
 
+            app.UseMiddleware<LoggingMiddleware>();
+
+            app.UseRouting();
             app.UseEndpoints(endpoints => endpoints.MapControllers());
 
             EntryDbProject.MigrateDB(app.ApplicationServices);

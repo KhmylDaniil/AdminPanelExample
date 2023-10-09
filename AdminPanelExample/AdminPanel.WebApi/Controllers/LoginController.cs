@@ -23,8 +23,11 @@ namespace AdminPanel.WebApi.Controllers
         /// <response code="200">
         /// Returns if succeeded
         /// </response>
+        /// <response code="401">
+        /// Returns in case of incorrect login or password
+        /// </response>
         /// <response code="500">
-        /// Returns if failed
+        /// Returns in case of other errors
         /// </response>
         /// <returns>Token</returns>
         [HttpPost]
