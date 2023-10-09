@@ -4,7 +4,7 @@ using AdminPanel.Core.Entities;
 using AdminPanel.Core.Exceptions;
 using AdminPanel.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography.X509Certificates;
+using AdminPanel.Core.Helpers;
 
 namespace AdminPanel.Core.Services
 {
@@ -30,8 +30,12 @@ namespace AdminPanel.Core.Services
                 .Where(u => string.IsNullOrEmpty(query.SearchByEmail) || u.Email.Contains(query.SearchByEmail))
                 .Where(u => u.Age >= query.MinAge && u.Age <= query.MaxAge)
                 .Where(u => query.SearchByRole == null || u.Roles.Any(r => r.Name.Contains(Enum.GetName(query.SearchByRole.Value))));
-            
-            return await filter.Skip((query.PageNumber - 1) * query.PageSize).Take(query.PageSize).Select(u => new UserDTO(u)).ToListAsync(cancellationToken);
+
+            return await filter.OrderBy(Enum.GetName(query.SortBy), query.IsAscending)
+                .Skip((query.PageNumber - 1) * query.PageSize)
+                .Take(query.PageSize)
+                .Select(u => new UserDTO(u))
+                .ToListAsync(cancellationToken);
         }
 
         /// <summary>

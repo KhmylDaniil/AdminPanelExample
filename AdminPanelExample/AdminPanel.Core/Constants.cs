@@ -32,4 +32,14 @@
         Support,
         User
     }
+
+    /// <summary>
+    /// User properties for sorting query
+    /// </summary>
+    public enum UserPropertyType
+    {
+        Name,
+        Age,
+        Email
+    }
 }

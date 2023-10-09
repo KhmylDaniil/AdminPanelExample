@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AdminPanel.Core.Exceptions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,10 +20,10 @@ namespace AdminPanel.DAL
         public static IServiceCollection AddDbSupport(this IServiceCollection services, IConfiguration configuration)
         {
             if (services == null)
-                throw new ArgumentNullException(nameof(services));
+                throw new ApplicationSystemException("Cant find services.");
 
             var connectionString = configuration.GetConnectionString("Default")
-                ?? throw new ArgumentException("Connection string not found.");
+                ?? throw new ApplicationSystemException("Connection string not found.");
 
             services.AddDbContext<AppDbContext>(o =>
             {
@@ -45,7 +46,7 @@ namespace AdminPanel.DAL
         {
             using var scope = serviceProvider.CreateScope();
             var dbContext = scope.ServiceProvider.GetService<AppDbContext>()
-                ?? throw new ArgumentException("This should never happen, the DbContext couldn't resolve!");
+                ?? throw new ApplicationSystemException("This should never happen, the DbContext couldn't resolve!");
 
             dbContext.Database.Migrate();
         }

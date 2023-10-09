@@ -19,5 +19,9 @@ namespace AdminPanel.Core.Contracts
 
         [Range(1, int.MaxValue)]
         public int PageNumber { get; set; } = 1;
+
+        public UserPropertyType SortBy { get; set; }
+
+        public bool IsAscending { get; set; }
     }
 }
