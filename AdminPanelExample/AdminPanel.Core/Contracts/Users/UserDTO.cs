@@ -1,6 +1,6 @@
 ﻿using AdminPanel.Core.Entities;
 
-namespace AdminPanel.Core.Contracts.DTO
+namespace AdminPanel.Core.Contracts.Users
 {
     /// <summary>
     /// DTO for user
@@ -23,8 +23,8 @@ namespace AdminPanel.Core.Contracts.DTO
         /// <param name="user">User</param>
         public UserDTO(User user)
         {
-            Id = user.Id; 
-            Name = user.Name; 
+            Id = user.Id;
+            Name = user.Name;
             Age = user.Age;
             Email = user.Email;
             Roles = string.Join(", ", user.Roles.Select(x => x.Name));

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace AdminPanel.Core.Contracts
+namespace AdminPanel.Core.Contracts.Users
 {
     public class GetUsersQuery
     {

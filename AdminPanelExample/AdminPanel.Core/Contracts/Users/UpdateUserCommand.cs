@@ -1,4 +1,6 @@
-﻿namespace AdminPanel.Core.Contracts
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AdminPanel.Core.Contracts.Users
 {
     /// <summary>
     /// Command for update user

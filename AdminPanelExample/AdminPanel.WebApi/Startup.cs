@@ -1,7 +1,6 @@
 ﻿using AdminPanel.Core.Interfaces;
 using AdminPanel.Core.Services;
 using AdminPanel.DAL;
-using Microsoft.OpenApi.Models;
 using System.Text.Json.Serialization;
 
 namespace AdminPanel.WebApi
@@ -15,27 +14,21 @@ namespace AdminPanel.WebApi
         /// IServiceCollection extension
         /// </summary>
         /// <param name="services"></param>
-        public static IServiceCollection ConfugureServices(this IServiceCollection services)
+        public static IServiceCollection ConfugureServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddControllers()
                 .AddJsonOptions(options => options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
             services.AddEndpointsApiExplorer();
 
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo()
-                {
-                    Title = "Api",
-                    Version = "v1",
-                    Description = "Backend"
-                });
-
-                c.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, $"{typeof(Program).Assembly.GetName().Name}.xml"), true);
-            });
+            services.AddCustomSwagger();
+            services.AddCustomAuthentication(configuration);
 
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IAppDbContext, AppDbContext>();
+            services.AddTransient<ILoginService, LoginService>();
+            services.AddTransient<IPasswordService, PasswordService>();
+            services.AddTransient<IJwtService, JwtService>();
 
             return services;
         }
@@ -51,16 +44,11 @@ namespace AdminPanel.WebApi
             app.UseRouting();
             app.UseHttpsRedirection();
 
-            if (env.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI(c =>
-                {
-                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-                });
-            }
+            app.UseAuthentication();
+            app.UseAuthorization();
 
-            app.UseHttpsRedirection();
+            if (env.IsDevelopment())
+                app.UseCustomSwagger();
 
             app.UseEndpoints(endpoints => endpoints.MapControllers());
 

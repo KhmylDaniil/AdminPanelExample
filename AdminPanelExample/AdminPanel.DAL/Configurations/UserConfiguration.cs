@@ -13,8 +13,9 @@ namespace AdminPanel.DAL.Configurations
         {
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Age).IsRequired();
-            builder.Property(x => x.Email).IsRequired();
+            builder.Property(x => x.Password).IsRequired();
 
+            builder.Property(x => x.Email).IsRequired();
             builder.HasIndex(x => x.Email).IsUnique();
 
             builder.HasMany(x => x.Roles)

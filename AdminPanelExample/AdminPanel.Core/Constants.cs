@@ -5,6 +5,10 @@
     /// </summary>
     public static class Constants
     {
+        public const string RoleClaim = "Role";
+        public const string NameClaim = "Name";
+        public const string IdClaim = "Id";
+
         public const string SuperAdminRoleName = "SuperAdmin";
 
         public const string AdminRoleName = "Admin";

@@ -1,10 +1,9 @@
-﻿using AdminPanel.Core.Contracts;
-using AdminPanel.Core.Contracts.DTO;
-using AdminPanel.Core.Entities;
+﻿using AdminPanel.Core.Entities;
 using AdminPanel.Core.Exceptions;
 using AdminPanel.Core.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using AdminPanel.Core.Helpers;
+using AdminPanel.Core.Contracts.Users;
 
 namespace AdminPanel.Core.Services
 {
@@ -14,8 +13,13 @@ namespace AdminPanel.Core.Services
     public class UserService: IUserService
     {
         private readonly IAppDbContext _appDbContext;
+        private readonly IPasswordService _passwordService;
 
-        public UserService(IAppDbContext appDbContext) => _appDbContext = appDbContext;
+        public UserService(IAppDbContext appDbContext, IPasswordService passwordService)
+        {
+            _appDbContext = appDbContext;
+            _passwordService = passwordService;
+        }
 
         /// <summary>
         /// Get user list
@@ -63,7 +67,14 @@ namespace AdminPanel.Core.Services
 
             var roles = await FindRolesAsync(command.RoleNames, cancellationToken);
 
-            _appDbContext.Users.Add(new User(command.Name, command.Age, command.Email, roles));
+            var password = _passwordService.CreatePasswordHash(command.Password);
+
+            _appDbContext.Users.Add(new User(
+                name: command.Name,
+                age: command.Age,
+                email: command.Email,
+                password: password,
+                roles: roles));
             await _appDbContext.SaveChangesAsync(cancellationToken);
         }
 
@@ -81,7 +92,14 @@ namespace AdminPanel.Core.Services
 
             var roles = await FindRolesAsync(command.RoleNames, cancellationToken);
 
-            existingUser.ChangeUser(command.Name, command.Age, command.Email, roles);
+            var password = _passwordService.CreatePasswordHash(command.Password);
+
+            existingUser.ChangeUser(
+                name: command.Name,
+                age: command.Age,
+                email: command.Email,
+                password: password,
+                roles: roles);
 
             await _appDbContext.SaveChangesAsync(cancellationToken);
         }

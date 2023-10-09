@@ -1,6 +1,7 @@
-﻿using AdminPanel.Core.Contracts;
-using AdminPanel.Core.Contracts.DTO;
+﻿using AdminPanel.Core;
+using AdminPanel.Core.Contracts.Users;
 using AdminPanel.Core.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AdminPanel.WebApi.Controllers
@@ -104,6 +105,8 @@ namespace AdminPanel.WebApi.Controllers
         /// </response>
         /// <returns></returns>
         [HttpPatch]
+        [Authorize]
+        [CustomAuthorization(Constants.RoleClaim, Constants.AdminRoleName)]
         public async Task AddNewRoleToUserAsync([FromQuery] AddNewRoleToUserCommand command, CancellationToken cancellationToken)
             => await _userService.AddNewRoleToUser(command, cancellationToken);
 

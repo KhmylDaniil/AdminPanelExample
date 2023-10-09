@@ -1,5 +1,4 @@
-﻿using AdminPanel.Core.Contracts;
-using AdminPanel.Core.Contracts.DTO;
+﻿using AdminPanel.Core.Contracts.Users;
 
 namespace AdminPanel.Core.Interfaces
 {
