@@ -97,11 +97,7 @@ namespace AdminPanel.WebApi.Controllers
         /// </response>
         [HttpPut("{id}")]
         public async Task UpdateUserAsync(Guid id, [FromQuery] CreateUserCommand command, CancellationToken cancellationToken)
-        {
-            var updateUserCommand = (UpdateUserCommand)command;
-            updateUserCommand.Id = id;
-            await _userService.UpdateUserAsync(updateUserCommand, cancellationToken);
-        }
+            => await _userService.UpdateUserAsync(id, command, cancellationToken);
 
         /// <summary>
         /// Add new role to user

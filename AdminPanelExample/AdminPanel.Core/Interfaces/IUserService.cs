@@ -31,11 +31,12 @@ namespace AdminPanel.Core.Interfaces
         Task CreateUserAsync(CreateUserCommand command, CancellationToken cancellationToken);
 
         /// <summary>
-        /// Update existing user
+        /// Update user command
         /// </summary>
-        /// <param name="command"><UpdateUserCommand/param>
+        /// <param name="id">Id</param>
+        /// <param name="command">Data for updating user</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        Task UpdateUserAsync(UpdateUserCommand command, CancellationToken cancellationToken);
+        Task UpdateUserAsync(Guid id, CreateUserCommand command, CancellationToken cancellationToken);
 
         /// <summary>
         /// Add new role to user

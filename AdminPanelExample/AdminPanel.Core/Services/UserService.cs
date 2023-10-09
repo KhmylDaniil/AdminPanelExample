@@ -84,15 +84,16 @@ namespace AdminPanel.Core.Services
         }
 
         /// <summary>
-        /// Update existing user
+        /// Update user command
         /// </summary>
-        /// <param name="command"><UpdateUserCommand/param>
+        /// <param name="id">Id</param>
+        /// <param name="command">Data for updating user</param>
         /// <param name="cancellationToken">Cancellation token</param>
-        public async Task UpdateUserAsync(UpdateUserCommand command, CancellationToken cancellationToken)
+        public async Task UpdateUserAsync(Guid id, CreateUserCommand command, CancellationToken cancellationToken)
         {
-            var existingUser = await FindUserAsync(command.Id, cancellationToken);
+            var existingUser = await FindUserAsync(id, cancellationToken);
 
-            if (await _appDbContext.Users.AnyAsync(u => u.Email == command.Email && u.Id != command.Id, cancellationToken))
+            if (await _appDbContext.Users.AnyAsync(u => u.Email == command.Email && u.Id != id, cancellationToken))
                 throw new RequestValidationException("Not unique user name");
 
             var roles = await FindRolesAsync(command.RoleNames, cancellationToken);

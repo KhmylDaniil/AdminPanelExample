@@ -41,7 +41,11 @@ namespace AdminPanel.WebApi
         public static void Configure(this IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseStaticFiles();
-            
+
+            app.UseMiddleware<LoggingMiddleware>();
+
+            app.UseRouting();
+
             app.UseHttpsRedirection();
 
             app.UseAuthentication();
@@ -50,9 +54,7 @@ namespace AdminPanel.WebApi
             if (env.IsDevelopment())
                 app.UseCustomSwagger();
 
-            app.UseMiddleware<LoggingMiddleware>();
-
-            app.UseRouting();
+            
             app.UseEndpoints(endpoints => endpoints.MapControllers());
 
             EntryDbProject.MigrateDB(app.ApplicationServices);
