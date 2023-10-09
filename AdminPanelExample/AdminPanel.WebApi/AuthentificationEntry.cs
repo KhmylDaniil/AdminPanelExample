@@ -5,16 +5,16 @@ using System.Text;
 namespace AdminPanel.WebApi
 {
     /// <summary>
-    /// Provides methods to configure custom authentication for the application.
+    /// Provides methods to configure custom authentication for the application
     /// </summary>
     public static class AuthenticationEntry
     {
         /// <summary>
-        /// Adds custom authentication to the specified <paramref name="services"/>.
+        /// Adds custom authentication to the specified <paramref name="services"/>
         /// </summary>
-        /// <param name="services">The collection of services to configure.</param>
-        /// <param name="configuration">The configuration containing authentication settings.</param>
-        /// <returns>The updated service collection.</returns>
+        /// <param name="services">The collection of services to configure</param>
+        /// <param name="configuration">The configuration containing authentication settings</param>
+        /// <returns>Updated service collection</returns>
         public static IServiceCollection AddCustomAuthentication(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddAuthentication(options =>

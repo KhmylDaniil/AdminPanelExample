@@ -3,7 +3,7 @@
 namespace AdminPanel.Core.Interfaces
 {
     /// <summary>
-    /// interface for userService
+    /// Interface for userService
     /// </summary>
     public interface IUserService
     {

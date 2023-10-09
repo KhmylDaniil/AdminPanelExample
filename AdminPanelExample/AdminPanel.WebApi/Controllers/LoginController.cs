@@ -13,6 +13,10 @@ namespace AdminPanel.WebApi.Controllers
     {
         private readonly ILoginService _loginService;
 
+        /// <summary>
+        /// ctor for <see cref="LoginController"/>
+        /// </summary>
+        /// <param name="loginService">Login service</param>
         public LoginController(ILoginService loginService) => _loginService = loginService;
 
         /// <summary>

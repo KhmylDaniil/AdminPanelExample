@@ -9,12 +9,26 @@ namespace AdminPanel.DAL
     /// </summary>
     public class AppDbContext: DbContext, IAppDbContext
     {
+        /// <summary>
+        /// Users
+        /// </summary>
         public DbSet<User> Users { get; set; }
 
+        /// <summary>
+        /// Roles
+        /// </summary>
         public DbSet<Role> Roles { get; set; }
 
+        /// <summary>
+        /// ctor for <see cref="AppDbContext"/>
+        /// </summary>
+        /// <param name="options">options</param>
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
+        /// <summary>
+        /// Overridden method for gathering configurations
+        /// </summary>
+        /// <param name="modelBuilder">model builder</param>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

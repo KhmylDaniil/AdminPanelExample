@@ -1,7 +1,7 @@
 ﻿namespace AdminPanel.Core.Contracts.Login
 {
     /// <summary>
-    /// command for log in
+    /// Command for log in
     /// </summary>
     public class LoginUserCommand
     {

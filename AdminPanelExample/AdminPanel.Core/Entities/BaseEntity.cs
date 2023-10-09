@@ -5,6 +5,9 @@
     /// </summary>
     public abstract class BaseEntity
     {
+        /// <summary>
+        /// Id
+        /// </summary>
         public Guid Id { get; set; }
     }
 }

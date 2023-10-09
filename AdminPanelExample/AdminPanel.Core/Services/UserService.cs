@@ -15,6 +15,11 @@ namespace AdminPanel.Core.Services
         private readonly IAppDbContext _appDbContext;
         private readonly IPasswordService _passwordService;
 
+        /// <summary>
+        /// ctor for <see cref="UserService"/>
+        /// </summary>
+        /// <param name="appDbContext">Db xontext</param>
+        /// <param name="passwordService">Password service</param>
         public UserService(IAppDbContext appDbContext, IPasswordService passwordService)
         {
             _appDbContext = appDbContext;

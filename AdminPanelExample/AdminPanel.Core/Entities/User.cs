@@ -8,32 +8,43 @@
         /// <summary>
         /// User name
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; private set; } = string.Empty;
 
         /// <summary>
         /// Age
         /// </summary>
-        public int Age { get; set; }
+        public int Age { get; private set; }
 
         /// <summary>
         /// Email
         /// </summary>
-        public string Email { get; set; } = string.Empty;
+        public string Email { get; private set; } = string.Empty;
 
         /// <summary>
         /// Hashed password
         /// </summary>
-        public string Password { get; set; } = string.Empty;
+        public string Password { get; private set; } = string.Empty;
 
         /// <summary>
         /// User roles
         /// </summary>
-        public List<Role> Roles { get; set; } = new();
+        public List<Role> Roles { get; private set; } = new();
 
+        /// <summary>
+        /// ctor for EF for <see cref="User"/>
+        /// </summary>
         public User()
         {
         }
 
+        /// <summary>
+        /// ctor for <see cref="User"/>
+        /// </summary>
+        /// <param name="name">Name</param>
+        /// <param name="age">Age</param>
+        /// <param name="email">Email</param>
+        /// <param name="password">Password</param>
+        /// <param name="roles">Roles</param>
         public User(string name, int age, string email, string password, List<Role> roles)
         {
             Name = name;
@@ -43,6 +54,14 @@
             Roles = roles;
         }
 
+        /// <summary>
+        /// Method for change user
+        /// </summary>
+        /// <param name="name">Name</param>
+        /// <param name="age">Age</param>
+        /// <param name="email">Email</param>
+        /// <param name="password">Password</param>
+        /// <param name="roles">Roles</param>
         public void ChangeUser(string name, int age, string email, string password, List<Role> roles)
         {
             Name = name;

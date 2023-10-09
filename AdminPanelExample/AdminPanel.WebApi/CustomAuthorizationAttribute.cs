@@ -15,10 +15,10 @@ namespace AdminPanel.WebApi
         private readonly string _claimValue;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CustomAuthorizationAttribute"/> class.
+        /// ctor for <see cref="CustomAuthorizationAttribute"/>
         /// </summary>
-        /// <param name="claimName">The name of the claim to check for.</param>
-        /// <param name="claimValue">The value of the claim to check for.</param>
+        /// <param name="claimName">The name of the claim to check for</param>
+        /// <param name="claimValue">The value of the claim to check for</param>
         public CustomAuthorizationAttribute(string claimName, string claimValue)
         {
             _claimName = claimName;
@@ -30,7 +30,7 @@ namespace AdminPanel.WebApi
         /// If the claim is absent, it sets the result to <see cref="ForbidResult"/>,
         /// preventing access to the action method or controller.
         /// </summary>
-        /// <param name="context">The authorization filter context.</param>
+        /// <param name="context">The authorization filter context</param>
         public void OnAuthorization(AuthorizationFilterContext context)
         {
             var existingClaimName = context.HttpContext.User.Claims.FirstOrDefault(x => x.Type == _claimName).Value;

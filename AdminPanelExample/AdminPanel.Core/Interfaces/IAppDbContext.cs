@@ -8,10 +8,20 @@ namespace AdminPanel.Core.Interfaces
     /// </summary>
     public interface IAppDbContext
     {
+        /// <summary>
+        /// Users
+        /// </summary>
         DbSet<User> Users { get; }
 
+        /// <summary>
+        /// Roles
+        /// </summary>
         DbSet<Role> Roles { get; }
 
+        /// <summary>
+        /// Save changes
+        /// </summary>
+        /// <param name="cancellationToken">cancellation token</param>
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

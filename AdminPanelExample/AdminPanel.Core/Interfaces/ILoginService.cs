@@ -3,7 +3,7 @@
 namespace AdminPanel.Core.Interfaces
 {
     /// <summary>
-    /// Inteeface for login service
+    /// Interface for login service
     /// </summary>
     public interface ILoginService
     {

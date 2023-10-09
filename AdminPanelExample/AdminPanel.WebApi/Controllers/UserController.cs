@@ -16,9 +16,9 @@ namespace AdminPanel.WebApi.Controllers
         private readonly IUserService _userService;
 
         /// <summary>
-        /// UserController ctor
+        /// ctor for <see cref="UserController"/>
         /// </summary>
-        /// <param name="userService">user service</param>
+        /// <param name="userService">User service</param>
         public UserController(IUserService userService) => _userService = userService;
 
         /// <summary>

@@ -14,6 +14,12 @@ namespace AdminPanel.Core.Services
         private readonly IJwtService _jwtService;
         private readonly IAppDbContext _appDbContext;
 
+        /// <summary>
+        /// ctor for <see cref="LoginService"/>
+        /// </summary>
+        /// <param name="passwordService">Password service</param>
+        /// <param name="jwtService">Jwt service</param>
+        /// <param name="appDbContext">Db context</param>
         public LoginService(IPasswordService passwordService, IJwtService jwtService, IAppDbContext appDbContext)
         {
             _appDbContext = appDbContext;

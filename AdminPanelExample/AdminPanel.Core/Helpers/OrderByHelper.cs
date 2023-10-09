@@ -4,6 +4,9 @@ using System.Reflection;
 
 namespace AdminPanel.Core.Helpers
 {
+    /// <summary>
+    /// Extension method class
+    /// </summary>
     public static class OrderByHelper
     {
         /// <summary>

@@ -5,6 +5,10 @@
     /// </summary>
     public class ApplicationSystemException: Exception
     {
+        /// <summary>
+        /// ctor for <see cref="ApplicationSystemException"/>
+        /// </summary>
+        /// <param name="message">message</param>
         public ApplicationSystemException(string message): base(message) { }
     }
 }

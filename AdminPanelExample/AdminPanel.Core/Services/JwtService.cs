@@ -11,23 +11,23 @@ using System.Text;
 namespace AdminPanel.Core.Services
 {
     /// <summary>
-    ///  Service for JWT tokens.
+    /// Service for JWT tokens
     /// </summary>
     public sealed class JwtService : IJwtService
     {
         private readonly IConfiguration _configuration;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JwtService"/> class.
+        /// Initializes a new instance of the <see cref="JwtService"/>
         /// </summary>
-        /// <param name="configuration">The configuration provider as an <see cref="IConfiguration"/>.</param>
+        /// <param name="configuration">Configuration</param>
         public JwtService(IConfiguration configuration) => _configuration = configuration;
 
         /// <summary>
-        /// Generates a JWT token for a user.
+        /// Generates a JWT token for a user
         /// </summary>
-        /// <param name="user">user</param>
-        /// <returns>The token transfer object.</returns>
+        /// <param name="user">User</param>
+        /// <returns>Token transfer object.</returns>
         public Token GenerateToken(User user)
         {
             var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(GetJwtSecret()));
@@ -83,7 +83,7 @@ namespace AdminPanel.Core.Services
         /// </summary>
         /// <param name="user">user</param>
         /// <returns>Role name with max access</returns>
-        private string GetHighestRoleName(User user)
+        private static string GetHighestRoleName(User user)
         {
             var role = user.Roles.FirstOrDefault(x => x.Id == Constants.SuperAdminRoleId)
                 ?? user.Roles.FirstOrDefault(x => x.Id == Constants.AdminRoleId)

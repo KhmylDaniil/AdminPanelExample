@@ -8,11 +8,11 @@
         /// <summary>
         /// Role name
         /// </summary>
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; init; } = string.Empty;
 
         /// <summary>
         /// Users
         /// </summary>
-        public List<User> Users { get; set; } = new();
+        public List<User> Users { get; init; } = new();
     }
 }
